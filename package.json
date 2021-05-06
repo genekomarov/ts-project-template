@@ -1,0 +1,27 @@
+{
+  "name": "finman-serv",
+  "version": "0.1.0",
+  "description": "",
+  "main": "bin/index.js",
+  "scripts": {
+    "start": "node bin/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genekomarov/finman-serv.git"
+  },
+  "author": "Eugene Komarov <gene.komarov@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/genekomarov/finman-serv/issues"
+  },
+  "homepage": "https://github.com/genekomarov/finman-serv#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "typescript": "^4.2.3",
+    "yargs": "^16.2.0"
+  }
+}
