@@ -1,4 +1,4 @@
-import Server from './server';
+import Server from './ServerApp';
 
 type commandType = 'start' | 'stop' | 'exit';
 
