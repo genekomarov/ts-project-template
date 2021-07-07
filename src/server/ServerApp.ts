@@ -1,5 +1,6 @@
 import express from 'express';
 import ServerHTTP from './ServerHTTP';
+import colors from 'colors/safe';
 
 const defaultPort = 80;
 
@@ -48,7 +49,8 @@ class ServerApp {
     start (port: number = defaultPort): void {
         if (this._server) {
             const port = this._server.getPort();
-            throw new Error(`Сервер уже запущен на порту ${port}. Сперва нужно остаовить сервер!`);
+            console.warn(colors.yellow(`Сервер уже запущен на порту ${port}. Сперва нужно остаовить сервер!`));
+            return;
         }
         this._server = new ServerHTTP(this._app, port);
     }
@@ -62,7 +64,7 @@ class ServerApp {
             console.log(`Сервер ${port ? 'на порту:' : ''} ${port ?? ''} будет остановлен`);
             this._serverDestroy();
         } else {
-            console.warn('В данный момент сервер не запущен.');
+            console.warn(colors.yellow('В данный момент сервер не запущен.'));
         }
     }
 

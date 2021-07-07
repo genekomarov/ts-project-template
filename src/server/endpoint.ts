@@ -1,34 +1,23 @@
 import Server from './ServerApp';
-
-type commandType = 'start' | 'stop' | 'exit';
-
-process.stdout.write('Hello, I am HTTP server\n');
+import CommandListener, {ICommands} from './CommandListener'
 
 const server = Server.getInstance();
 
-process.stdout.write('command: ');
-process.stdin.on('data', stdinDataHandler);
-
-function stdinDataHandler(data: Buffer) {
-    process.stdin.removeListener('data', stdinDataHandler);
-    const rawCommand = data.toString();
-    const command = rawCommand.replace(/\W*/g, '') as commandType;
-    switch (command) {
-        case 'start':
-            server.start();
-            break;
-        case 'stop':
-            server.stop();
-            break;
-        case 'exit':
-            process.exit(0);
-            break;
-        default:
-            console.log('Введена неправильная команда!');
-            break;
-    }
-    Promise.resolve().then(() => {
-        process.stdout.write('command: ');
-        process.stdin.on('data', stdinDataHandler);
-    });
+enum commandNames {
+    start = 'start',
+    stop = 'stop',
+    exit = 'exit'
 }
+
+const commands: ICommands = {};
+commands[commandNames.start] = CommandListener.createCommandFunction(() => {
+    return server.start();
+});
+commands[commandNames.stop] = CommandListener.createCommandFunction(() => {
+    return server.stop();
+});
+commands[commandNames.exit] = CommandListener.createCommandFunction(() => {
+    process.exit(0);
+});
+
+const commandListener = new CommandListener(commands);
