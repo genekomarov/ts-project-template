@@ -1,6 +1,9 @@
 import {Server as HTTPServer} from 'http';
 import express from 'express';
 
+/**
+ * Обертка над express для упрощения интерфейса взаимодействия
+ */
 export default class ServerHTTP {
     private readonly _server: HTTPServer;
     private readonly _port: number;

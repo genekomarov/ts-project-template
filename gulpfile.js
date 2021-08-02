@@ -1,6 +1,7 @@
 // Константы gulp
-const gulp = require('gulp');
+const {src, dest, series} = require('gulp');
 const ts = require('gulp-typescript');
+const del = require('del');
 
 // Константы yargs
 const yargs = require('yargs/yargs');
@@ -11,17 +12,27 @@ const argv = yargs(hideBin(process.argv)).argv;
 const tsProject = ts.createProject('tsconfig.json');
 const destination = 'bin';
 
-function build() {
-    if (argv.file && typeof c === 'string') {
+function buildFile() {
+    if (argv.file && typeof argv.file === 'string') {
         const file = argv.file;
-        return gulp.src(file)
+        return src(file)
             .pipe(tsProject()).js
-            .pipe(gulp.dest(destination));
+            .pipe(dest(destination));
     }
-    console.log(argv.file);
-    return tsProject.src()
-        .pipe(tsProject()).js
-        .pipe(gulp.dest(destination));
 }
 
-module.exports.build = build;
+function clear() {
+    return del([destination + '/**']);
+}
+
+function buildAll() {
+    return tsProject.src()
+        .pipe(tsProject()).js
+        .pipe(dest(destination));
+}
+
+const clearAndBuildAll = series(clear, buildAll);
+
+module.exports = {
+    clearAndBuildAll, buildAll, buildFile, clear
+};

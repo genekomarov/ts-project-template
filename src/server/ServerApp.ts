@@ -11,7 +11,7 @@ const defaultPort = 80;
 class ServerApp {
     /** Приложение Express*/
     private readonly _app: express.Express;
-    /** Инстанс сервена, который запущен в данный момент*/
+    /** Инстанс сервера, который запущен в данный момент*/
     private _server: ServerHTTP = null;
     /** Инстанс данного класса*/
     private static _instance: ServerApp;
