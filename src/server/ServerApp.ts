@@ -13,8 +13,6 @@ class ServerApp {
     private readonly _app: express.Express;
     /** Инстанс сервера, который запущен в данный момент*/
     private _server: ServerHTTP = null;
-    /** Инстанс данного класса*/
-    private static _instance: ServerApp;
 
     /**
      *  Конструктор.
@@ -22,24 +20,11 @@ class ServerApp {
      *  Если попытаться вызвать контруктор более одного раза, будет выброшена ошибка.
      */
     constructor() {
-        if (ServerApp._instance) {
-            throw new Error('Вы пытаетесь создать экземпляр ServerApp, однако, ServerApp является синглтоном.'
-                + ' Используйте метод ServerApp.getInstance()');
-        } else {
-            ServerApp._instance = this;
-            this._app = express();
-            this._app.get('/', (rec, res) => {
-                res.send('Hello, World!');
-            });
-            console.log('Приложение Express создано.');
-        }
-    }
-
-    /**
-     * Получение экземпляра сервера
-     */
-    getInstance (): ServerApp {
-        return ServerApp._instance;
+        this._app = express();
+        this._app.get('/', (rec, res) => {
+            res.send('Hello, World!');
+        });
+        console.log('Приложение Express создано.');
     }
 
     /**

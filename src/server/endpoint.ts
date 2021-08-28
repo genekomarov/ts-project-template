@@ -1,8 +1,6 @@
 import Server from './ServerApp';
 import CommandListener, {ICommands} from './CommandListener'
 
-const server = Server.getInstance();
-
 enum commandNames {
     start = 'start',
     stop = 'stop',
@@ -11,10 +9,10 @@ enum commandNames {
 
 const commands: ICommands = {};
 commands[commandNames.start] = CommandListener.createCommandFunction(() => {
-    return server.start();
+    return Server.start();
 });
 commands[commandNames.stop] = CommandListener.createCommandFunction(() => {
-    return server.stop();
+    return Server.stop();
 });
 commands[commandNames.exit] = CommandListener.createCommandFunction(() => {
     process.exit(0);
