@@ -22,7 +22,7 @@ function buildFile() {
 }
 
 function clear() {
-    return del([destination + '/**']);
+    return del([destination + '/**', './index.js']);
 }
 
 function buildAll() {
