@@ -4,7 +4,7 @@
   "description": "Template for typescript project with gulp compilation",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm gulp clearAndBuildAll",
+    "postinstall": "npx gulp clearAndBuildAll",
     "start": "node index.js",
     "buildAll": "npx gulp buildAll",
     "clear": "npx gulp clear",
